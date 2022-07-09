@@ -1,9 +1,7 @@
+import { SuggestionsView } from "~/views/SuggestionsView";
+
 const SuggestionsRoute = () => {
-  return (
-    <div>
-      <h1>Suggestions</h1>
-    </div>
-  );
+  return <SuggestionsView />;
 };
 
 export default SuggestionsRoute;

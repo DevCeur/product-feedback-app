@@ -7,6 +7,7 @@ module.exports = {
         "bg-primary": "#F7F8FD",
         "bg-secondary": "#FFFFFF",
         "bg-overlay": "#F2F4FF",
+        "bg-overlay-dark": "#373F68",
 
         "fg-primary": "#3A4374",
         "fg-secondary": "#647196",
