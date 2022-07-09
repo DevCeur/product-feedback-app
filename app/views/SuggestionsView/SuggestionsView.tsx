@@ -1,12 +1,16 @@
+import { ProjectBanner } from "~/components/ProjectBanner";
+import { ProjectRoadmapBanner } from "~/components/ProjectRoadmapBanner";
+import { FeedbackCategoriesFilter } from "~/components/FeedbackCategoriesFilter";
+
 export const SuggestionsView = () => {
   return (
     <div className="w-full h-full grid grid-cols-4 grid-flow-col gap-7">
       <div className="w-full col-span-1 flex flex-col space-y-7">
-        <div className="h-[180px] bg-white" />
+        <ProjectBanner />
 
-        <div className="h-[180px] bg-white" />
+        <FeedbackCategoriesFilter />
 
-        <div className="h-[180px] bg-white" />
+        <ProjectRoadmapBanner />
       </div>
 
       <div className="w-full h-full col-span-3 overflow-hidden flex flex-col">
