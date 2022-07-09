@@ -11,6 +11,8 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import tailwindStyles from "~/styles/generated/tailwind.css";
 
+import { MainLayout } from "./components/MainLayout";
+
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Product Feedback",
@@ -29,7 +31,9 @@ const App = () => {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <MainLayout>
+          <Outlet />
+        </MainLayout>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
