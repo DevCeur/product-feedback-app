@@ -18,11 +18,19 @@ module.exports = {
         "fg-overlay": "#FFFFFF",
 
         "brand-purple": "#AD1FEA",
+        "brand-purple-light": "#C75AF6",
 
         "brand-orange": "#F49F85",
 
+        "brand-red": "#D73737",
+        "brand-red-light": "#E98888",
+
         "brand-blue-primary": "#4661E6",
+        "brand-blue-primary-light": "7C91F9",
+
         "brand-blue-secondary": "#62BCFA",
+
+        "brand-gray-primary-light": "#656EA3",
       },
     },
   },
