@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { BiChevronDown, BiMenu } from "react-icons/bi";
 import { HiLightBulb, HiPlusSm } from "react-icons/hi";
 
+import { FeedbackCard } from "~/components/FeedbackCard";
 import { ProjectBanner } from "~/components/ProjectBanner";
 import { ProjectRoadmapBanner } from "~/components/ProjectRoadmapBanner";
 import { FeedbackCategoriesFilter } from "~/components/FeedbackCategoriesFilter";
@@ -60,8 +61,8 @@ export const SuggestionsView = () => {
           <AddSuggestionLink />
         </div>
 
-        <div className="h-full lg:relative lg:overflow-scroll pb-12 lg:pb-[94px]">
-          <div className="w-full h-[2000px] bg-white lg:absolute top-0 right-0" />
+        <div className="w-full h-full lg:relative lg:overflow-scroll pb-12 lg:pb-[94px]">
+          <FeedbackCard />
         </div>
       </div>
     </div>
