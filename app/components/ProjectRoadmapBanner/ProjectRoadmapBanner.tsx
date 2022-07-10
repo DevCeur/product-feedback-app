@@ -24,13 +24,13 @@ const RoadmapCategegory = ({ count, name, color }: RoadmapCategoryProps) => {
 
 export const ProjectRoadmapBanner = () => {
   return (
-    <div className="bg-white p-6 rounded-xl">
+    <div className="bg-white p-4 lg:p-6 rounded-xl">
       <div className="mb-6 flex justify-between items-center">
         <h4 className="text-lg text-fg-primary font-bold">Roadmap</h4>
 
         <Link
           to="/roadmap"
-          className="text-sm text-brand-blue-primary underline"
+          className="text-sm text-brand-blue-primary underline hover:text-brand-blue-primary-light transition-colors duration-200"
         >
           View
         </Link>

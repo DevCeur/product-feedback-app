@@ -11,6 +11,7 @@ module.exports = {
         "bg-primary": "#F7F8FD",
         "bg-secondary": "#FFFFFF",
         "bg-overlay": "#F2F4FF",
+        "bg-overlay-light": "#CFD7FF",
         "bg-overlay-dark": "#373F68",
 
         "fg-primary": "#3A4374",
@@ -26,7 +27,7 @@ module.exports = {
         "brand-red-light": "#E98888",
 
         "brand-blue-primary": "#4661E6",
-        "brand-blue-primary-light": "7C91F9",
+        "brand-blue-primary-light": "#7C91F9",
 
         "brand-blue-secondary": "#62BCFA",
 

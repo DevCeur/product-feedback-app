@@ -6,10 +6,24 @@ import { ProjectBanner } from "~/components/ProjectBanner";
 import { ProjectRoadmapBanner } from "~/components/ProjectRoadmapBanner";
 import { FeedbackCategoriesFilter } from "~/components/FeedbackCategoriesFilter";
 
+const AddSuggestionLink = () => {
+  return (
+    <Link
+      to="/create-feedback"
+      className="text-sm text-white font-medium py-3 px-5 min-w-[150px] flex items-center bg-brand-purple hover:bg-brand-purple-light transition-colors duration-200 rounded-xl"
+    >
+      <span className="inline-block">
+        <HiPlusSm className="text-lg mr-2" />
+      </span>
+      Add Feedback
+    </Link>
+  );
+};
+
 export const SuggestionsView = () => {
   return (
-    <div className="w-full h-full grid grid-cols-4 grid-flow-col gap-7">
-      <div className="w-full col-span-1 flex flex-col space-y-7">
+    <div className="w-full h-full flex flex-col lg:grid grid-cols-4 grid-flow-col gap-7">
+      <div className="w-full col-span-1 lg:flex flex-col lg:space-y-6 grid grid-cols-3 gap-2">
         <ProjectBanner />
 
         <FeedbackCategoriesFilter />
@@ -32,19 +46,11 @@ export const SuggestionsView = () => {
             </button>
           </div>
 
-          <Link
-            to="/create-feedback"
-            className="text-sm text-white font-medium py-3 px-5 min-w-[150px] flex items-center bg-brand-purple hover:bg-brand-purple-light transition-colors duration-200 rounded-xl"
-          >
-            <span className="inline-block">
-              <HiPlusSm className="text-lg mr-2" />
-            </span>
-            Add Feedback
-          </Link>
+          <AddSuggestionLink />
         </div>
 
-        <div className="h-full relative overflow-scroll pb-[94px]">
-          <div className="w-full h-[2000px] bg-white absolute top-0 right-0" />
+        <div className="h-full lg:relative lg:overflow-scroll pb-12 lg:pb-[94px]">
+          <div className="w-full h-[2000px] bg-white lg:absolute top-0 right-0" />
         </div>
       </div>
     </div>
