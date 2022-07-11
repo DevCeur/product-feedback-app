@@ -1,10 +1,4 @@
-export const FEEDBACK_CATEGORIES_FILTERS = [
-  "UI",
-  "UX",
-  "Enhancement",
-  "Bug",
-  "Feature",
-];
+import type { SuggestionCategory } from "@prisma/client";
 
 const FilterButton = ({ filter }: { filter: string }) => {
   return (
@@ -16,13 +10,19 @@ const FilterButton = ({ filter }: { filter: string }) => {
   );
 };
 
-export const FeedbackCategoriesFilter = () => {
+type SuggestionCategoriesFilterProps = {
+  categories: SuggestionCategory[];
+};
+
+export const SuggestionCategoriesFilter = ({
+  categories,
+}: SuggestionCategoriesFilterProps) => {
   return (
     <div className="w-full flex flex-wrap gap-x-2 gap-y-3 bg-white p-4 lg:p-6 rounded-xl">
       <FilterButton filter="All" />
 
-      {FEEDBACK_CATEGORIES_FILTERS.map((filter) => (
-        <FilterButton key={filter} filter={filter} />
+      {categories.map((category) => (
+        <FilterButton key={category.id} filter={category.title} />
       ))}
     </div>
   );

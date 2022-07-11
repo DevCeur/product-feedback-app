@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SuggestionStatus {
+  IDLE
+  PLANNED
+  IN_PROGRESS
+  LIVE
+}
+
+model Project {
+  id                   String               @id @default(uuid())
+  name                 String
+  suggestions          Suggestion[]
+  suggestionCategories SuggestionCategory[]
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @default(now()) @updatedAt
+}
+
+model SuggestionCategory {
+  id          String       @id @default(uuid())
+  title       String
+  project     Project?     @relation(fields: [projectId], references: [id])
+  projectId   String?
+  suggestions Suggestion[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now()) @updatedAt
+}
+
+model Suggestion {
+  id          String              @id @default(uuid())
+  title       String
+  description String
+  project     Project?            @relation(fields: [projectId], references: [id])
+  projectId   String?
+  status      SuggestionStatus    @default(IDLE)
+  votes       Int
+  category    SuggestionCategory? @relation(fields: [categoryId], references: [id])
+  categoryId  String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @default(now()) @updatedAt
+
+}

@@ -1,5 +1,7 @@
 import { Link } from "@remix-run/react";
 
+import type { ProjectExpanded } from "~/utils/types";
+
 const Dot = ({ color }: { color: string }) => {
   return <div className={`w-2 h-2 rounded-full ${color}`} />;
 };
@@ -22,7 +24,25 @@ const RoadmapCategegory = ({ count, name, color }: RoadmapCategoryProps) => {
   );
 };
 
-export const ProjectRoadmapBanner = () => {
+type ProjectRoadmapBannerProps = {
+  project: ProjectExpanded;
+};
+
+export const ProjectRoadmapBanner = ({
+  project,
+}: ProjectRoadmapBannerProps) => {
+  const totalPlanned = project.suggestions.filter(
+    (suggestion) => suggestion.status === "PLANNED"
+  ).length;
+
+  const totalInProgess = project.suggestions.filter(
+    (suggestion) => suggestion.status === "IN_PROGRESS"
+  ).length;
+
+  const totalLive = project.suggestions.filter(
+    (suggestion) => suggestion.status === "LIVE"
+  ).length;
+
   return (
     <div className="bg-white p-4 lg:p-6 rounded-xl">
       <div className="mb-6 flex justify-between items-center">
@@ -37,18 +57,22 @@ export const ProjectRoadmapBanner = () => {
       </div>
 
       <div className="flex flex-col space-y-2">
-        <RoadmapCategegory name="Planned" color="bg-brand-orange" count={2} />
+        <RoadmapCategegory
+          name="Planned"
+          color="bg-brand-orange"
+          count={totalPlanned}
+        />
 
         <RoadmapCategegory
           name="In-Progress"
           color="bg-brand-purple"
-          count={3}
+          count={totalInProgess}
         />
 
         <RoadmapCategegory
           name="Live"
           color="bg-brand-blue-secondary"
-          count={1}
+          count={totalLive}
         />
       </div>
     </div>
