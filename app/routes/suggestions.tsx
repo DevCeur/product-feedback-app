@@ -1,11 +1,13 @@
+// delete me when project selection is ready!
+
 import { useLoaderData } from "@remix-run/react";
 
 import type { LoaderFunction } from "@remix-run/node";
 import type { ProjectExpanded } from "~/utils/types";
 
-import { getLastProject } from "~/services/project";
+import { getLastProject } from "~/services/project.server";
 
-import { SuggestionsView } from "~/views/SuggestionsView";
+import { ProjectOverviewView } from "~/views/ProjectOverviewView";
 
 type SuggestionsLoaderData = {
   project: ProjectExpanded;
@@ -20,7 +22,7 @@ export const loader: LoaderFunction = async () => {
 const SuggestionsRoute = () => {
   const { project } = useLoaderData<SuggestionsLoaderData>();
 
-  return <SuggestionsView project={project} />;
+  return <ProjectOverviewView project={project} />;
 };
 
 export default SuggestionsRoute;

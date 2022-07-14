@@ -23,3 +23,9 @@
     @apply bg-bg-primary;
   }
 }
+
+@layer components {
+  .icon-button {
+    @apply w-10 h-10 text-xl flex items-center justify-center rounded-xl bg-bg-overlay;
+  }
+}

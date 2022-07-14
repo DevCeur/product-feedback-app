@@ -3,6 +3,10 @@ module.exports = {
 
   theme: {
     extend: {
+      screens: {
+        "2xl": "1440px",
+      },
+
       backgroundImage: {
         "project-gradient":
           "radial-gradient(circle, rgba(232,175,77,1) 0%, rgba(163,55,246,1) 75%, rgba(40,167,237,1) 100%)",

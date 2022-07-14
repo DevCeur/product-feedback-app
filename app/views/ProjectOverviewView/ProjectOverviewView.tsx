@@ -6,6 +6,7 @@ import type { ProjectExpanded } from "~/utils/types";
 
 import { ProjectBanner } from "~/components/ProjectBanner";
 import { SuggestionCard } from "~/components/SuggestionCard";
+import { ProjectQuickActions } from "~/components/ProjectQuickActions";
 import { ProjectRoadmapBanner } from "~/components/ProjectRoadmapBanner";
 import { SuggestionCategoriesFilter } from "~/components/SuggestionCategoriesFilter";
 
@@ -24,15 +25,37 @@ const AddSuggestionLink = () => {
   );
 };
 
-type SuggestionsViewProps = {
+type ProjectOverviewViewProps = {
   project: ProjectExpanded;
+  isAuthenticated?: boolean;
 };
 
-export const SuggestionsView = ({ project }: SuggestionsViewProps) => {
+export const ProjectOverviewView = ({
+  project,
+  isAuthenticated,
+}: ProjectOverviewViewProps) => {
   return (
-    <div className="w-full flex flex-col lg:grid grid-cols-4 grid-flow-col md:gap-7">
+    <div
+      className={`w-full flex flex-col lg:grid grid-cols-4 grid-flow-col md:gap-7 ${
+        isAuthenticated && "pb-12 2xl:pb-0"
+      }`}
+    >
       <div className="w-full col-span-1 hidden lg:flex flex-col lg:space-y-6 md:grid grid-cols-3 gap-2">
-        <ProjectBanner project={project} />
+        <div className="flex flex-col space-y-2">
+          <ProjectBanner project={project} />
+
+          {isAuthenticated && (
+            <div className="hidden md:block lg:hidden">
+              <ProjectQuickActions />
+            </div>
+          )}
+        </div>
+
+        {isAuthenticated && (
+          <div className="hidden lg:block">
+            <ProjectQuickActions />
+          </div>
+        )}
 
         <SuggestionCategoriesFilter categories={project.suggestionCategories} />
 
