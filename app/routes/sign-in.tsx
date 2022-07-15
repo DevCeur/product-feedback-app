@@ -9,8 +9,9 @@ import { EMAIL_REGEX, ERROR_MESSAGE, ROUTE } from "~/utils/enum";
 import { withAuth } from "~/utils/authPolicy.server";
 import { commitSession, getUserSession } from "~/utils/authSession.server";
 
-import { SignInView } from "~/views/SignInView";
 import { signInUser } from "~/services/user.server";
+
+import { SignInView } from "~/views/SignInView";
 
 export const loader: LoaderFunction = ({ request }) => {
   return withAuth(request, { isPrivate: false });

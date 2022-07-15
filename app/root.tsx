@@ -14,13 +14,12 @@ import type {
 } from "@remix-run/node";
 import type { User } from "@prisma/client";
 
-import { prisma } from "~/lib/prisma.server";
-
 import { MainLayout } from "./components/MainLayout";
 
-import { getCurrentUserId } from "./services/user.server";
+import { getCurrentUser, getCurrentUserId } from "./services/user.server";
 
 import tailwindStyles from "~/styles/generated/tailwind.css";
+import menuButtonStyles from "@reach/menu-button/styles.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -30,6 +29,7 @@ export const meta: MetaFunction = () => ({
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStyles },
+  { rel: "stylesheet", href: menuButtonStyles },
 ];
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -38,9 +38,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   let user: User | null = null;
 
   if (userId) {
-    user = await prisma.user.findUnique({
-      where: { email: "jhondoe@email.com" },
-    });
+    const { user: authUser } = await getCurrentUser(request);
+
+    user = authUser;
   }
 
   return { user };

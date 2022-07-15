@@ -29,3 +29,43 @@
     @apply w-10 h-10 text-xl flex items-center justify-center rounded-xl bg-bg-overlay;
   }
 }
+
+[data-reach-menu-item] {
+  padding: 12px 24px !important;
+
+  color: #3a4374;
+  font-size: 16px !important;
+
+  border-bottom: 1px solid #eaeaea;
+}
+
+[data-reach-menu-item]:hover {
+  color: #3a4374 !important;
+  background-color: #f2f4ff !important;
+
+  transition: all 0.2s ease;
+}
+
+[data-reach-menu-item]:last-child {
+  border-bottom: 0;
+}
+
+.menu-list-items-container[data-reach-menu-list] {
+  padding: 0;
+
+  border: none;
+  border-radius: 12px;
+
+  position: absolute;
+
+  overflow: hidden;
+
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.profile-menu-items[data-reach-menu-list] {
+  width: 200px;
+
+  top: 24px;
+  right: -48px;
+}

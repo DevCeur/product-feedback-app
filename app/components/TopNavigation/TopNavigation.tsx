@@ -5,6 +5,7 @@ import type { User } from "@prisma/client";
 import { ROUTE } from "~/utils/enum";
 
 import { Navlink } from "../Navlink";
+import { ProfileMenu } from "../ProfileMenu";
 
 type TopNavigationProps = {
   user: User;
@@ -32,16 +33,7 @@ export const TopNavigation = ({ user }: TopNavigationProps) => {
 
       {user ? (
         <div className="flex justify-center items-center">
-          <Link
-            to={ROUTE.PROFILE}
-            className="w-12 h-12 overflow-hidden rounded-full"
-          >
-            <img
-              src={user.avatar}
-              alt={`${user.username} avatar`}
-              className="inline-block w-10"
-            />
-          </Link>
+          <ProfileMenu user={user} />
         </div>
       ) : (
         <div className="flex items-center space-x-6">
