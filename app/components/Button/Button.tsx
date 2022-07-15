@@ -12,7 +12,10 @@ const COLORS_BY_COLOR_SCHEME = {
     background: "bg-brand-purple",
     hovered: "hover:bg-brand-purple-light",
   },
-  blue: { background: "bg-brand-blue", hovered: "hover:bg-brand-blue-light" },
+  blue: {
+    background: "bg-brand-blue-primary",
+    hovered: "hover:bg-brand-blue-primary-light",
+  },
   gray: {
     background: "bg-fg-primary",
     hovered: "hover:bg-brand-gray-primary-light",
@@ -39,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
         </span>
       )}
 
-      {children}
+      <span className="w-full inline-block text-center">{children}</span>
     </button>
   );
 };

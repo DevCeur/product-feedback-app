@@ -5,6 +5,8 @@ import { useLoaderData } from "@remix-run/react";
 import type { LoaderFunction } from "@remix-run/node";
 import type { ProjectExpanded } from "~/utils/types";
 
+import { withAuth } from "~/utils/authPolicy.server";
+
 import { getLastProject } from "~/services/project.server";
 
 import { ProjectOverviewView } from "~/views/ProjectOverviewView";
@@ -13,10 +15,15 @@ type SuggestionsLoaderData = {
   project: ProjectExpanded;
 };
 
-export const loader: LoaderFunction = async () => {
-  const { lastProject } = await getLastProject();
+export const loader: LoaderFunction = async ({ request }) => {
+  return withAuth(request, {
+    isPrivate: true,
+    callback: async () => {
+      const { lastProject } = await getLastProject();
 
-  return { project: lastProject };
+      return { project: lastProject };
+    },
+  });
 };
 
 const SuggestionsRoute = () => {
