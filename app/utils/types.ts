@@ -15,3 +15,8 @@ export type ProjectExpanded = Project & {
 export type RootLoaderData = {
   user: User;
 };
+
+export type ExtendedError = Error & {
+  code: string;
+  meta: { target: string[] };
+};

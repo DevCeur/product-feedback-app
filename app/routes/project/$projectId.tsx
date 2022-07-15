@@ -14,7 +14,7 @@ type SuggestionsLoaderData = {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  // TO-DO | create this functionality to make this page dynamic
+  // TO-DO | create functionality to fetch this page dynamically
 
   // const { project } = await getProjectById({ id: params.projectId })
 

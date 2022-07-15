@@ -1,3 +1,7 @@
+import { Link } from "@remix-run/react";
+
+import { ROUTE } from "~/utils/enum";
+
 import { Button } from "~/components/Button";
 import { FormCard } from "~/components/FormCard";
 import { TextInput } from "~/components/TextInput";
@@ -22,8 +26,12 @@ export const SignInView = () => {
             />
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex flex-col items-center justify-center space-y-4">
             <Button colorScheme="blue">Sign In</Button>
+
+            <Link to={ROUTE.SIGN_UP} className="text-sm text-fg-secondary">
+              Don't have an account? Create One.
+            </Link>
           </div>
         </form>
       </FormCard>
