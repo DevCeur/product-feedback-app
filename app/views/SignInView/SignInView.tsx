@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import { ROUTE } from "~/utils/enum";
 
@@ -7,6 +7,8 @@ import { FormCard } from "~/components/FormCard";
 import { TextInput } from "~/components/TextInput";
 
 export const SignInView = () => {
+  const actionData = useActionData();
+
   return (
     <div className="w-full flex justify-center">
       <FormCard
@@ -14,16 +16,27 @@ export const SignInView = () => {
         summary="Sign In to your account and manage all your projects feedback"
         variant="centered"
       >
-        <form className="w-full flex flex-col">
+        <Form method="post" className="w-full flex flex-col">
           <div className="mb-10 flex flex-col space-y-6">
-            <TextInput label="Email or Username" name="emailUsername" />
+            <TextInput
+              label="Email or Username"
+              name="emailUsername"
+              error={actionData?.errors?.emailUsername}
+            />
 
             <TextInput
               label="Password"
               type="password"
               name="password"
               placeholder="+6 characters"
+              error={actionData?.errors?.password}
             />
+
+            {actionData?.errors?.wrongCredentials && (
+              <span className="text-xs text-red-500">
+                {actionData.errors.wrongCredentials}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col items-center justify-center space-y-4">
@@ -33,7 +46,7 @@ export const SignInView = () => {
               Don't have an account? Create One.
             </Link>
           </div>
-        </form>
+        </Form>
       </FormCard>
     </div>
   );
