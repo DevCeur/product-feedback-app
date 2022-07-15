@@ -1,5 +1,8 @@
-type FormCardProps = {
+import type { IconType } from "react-icons/lib";
+
+export type FormCardProps = {
   title: string;
+  icon?: IconType;
   summary?: string;
   variant?: "default" | "centered";
 };
@@ -7,11 +10,18 @@ type FormCardProps = {
 export const FormCard: React.FC<FormCardProps> = ({
   title,
   summary,
-  variant,
   children,
+  icon: Icon,
+  variant = "default",
 }) => {
   return (
-    <div className="w-full h-min max-w-[540px] bg-white p-12 rounded-xl">
+    <div className="w-full h-min max-w-[540px] bg-white p-12 rounded-xl relative">
+      {Icon && (
+        <div className="absolute -top-[28px] w-14 h-14 flex items-center justify-center bg-project-gradient bg-[length:275px] bg-left-bottom text-white rounded-full">
+          <Icon className="text-2xl" />
+        </div>
+      )}
+
       <div
         className={`${
           variant === "centered" ? "text-center" : "text-left"

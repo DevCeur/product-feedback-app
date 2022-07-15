@@ -16,7 +16,7 @@ export const TopNavigation = ({ user }: TopNavigationProps) => {
     <nav className="w-full h-16 py-4 px-6 rounded-b-xl bg-white mb-10 flex justify-between items-center">
       <div className="flex items-center">
         <Link
-          to="/"
+          to={user ? ROUTE.DASHBOARD : "/sign-in"}
           className="text-brand-blue-primary hover:text-brand-blue-primary-light text-lg font-semibold transition-colors duration-200"
         >
           <span className="hidden md:inline-block">ProductFeedback</span>

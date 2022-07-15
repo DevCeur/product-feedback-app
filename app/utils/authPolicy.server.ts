@@ -26,8 +26,7 @@ export const withAuth: Policy<{ user: User | null }> = async (
   }
 
   if (!isPrivate && user) {
-    // TO-DO | update to redirect to dashboard
-    return redirect(ROUTE.SUGGESTIONS);
+    return redirect(ROUTE.DASHBOARD);
   }
 
   if (callback) {

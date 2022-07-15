@@ -4,7 +4,7 @@ import type { LoaderFunction } from "@remix-run/node";
 import type { ProjectExpanded } from "~/utils/types";
 
 import { getCurrentUserId } from "~/services/user.server";
-import { getLastProject } from "~/services/project.server";
+import { getProjectById } from "~/services/project.server";
 
 import { ProjectOverviewView } from "~/views/ProjectOverviewView";
 
@@ -13,16 +13,14 @@ type SuggestionsLoaderData = {
   isAuthenticated: boolean;
 };
 
-export const loader: LoaderFunction = async ({ request }) => {
-  // TO-DO | create functionality to fetch this page dynamically
+export const loader: LoaderFunction = async ({ request, params }) => {
+  const { projectId } = params;
 
-  // const { project } = await getProjectById({ id: params.projectId })
-
-  const { lastProject } = await getLastProject();
+  const { project } = await getProjectById({ id: projectId || "" });
 
   const userId = await getCurrentUserId(request);
 
-  return { isAuthenticated: !!userId, project: lastProject };
+  return { isAuthenticated: !!userId, project: project };
 };
 
 const ProjectOverviewRoute = () => {

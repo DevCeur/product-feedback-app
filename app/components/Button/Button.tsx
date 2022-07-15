@@ -27,14 +27,16 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   colorScheme,
   icon: Icon,
+  ...buttonProps
 }) => {
   return (
     <button
-      className={`text-sm text-white font-medium py-3 px-5 min-w-[150px] flex items-center ${
+      className={`text-sm text-white font-medium py-3 px-5 flex items-center ${
         COLORS_BY_COLOR_SCHEME[colorScheme || "purple"].background
       } ${
         COLORS_BY_COLOR_SCHEME[colorScheme || "purple"].hovered
       } transition-colors duration-200 rounded-xl`}
+      {...buttonProps}
     >
       {Icon && (
         <span className="inline-block">

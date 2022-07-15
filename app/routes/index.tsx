@@ -1,11 +1,9 @@
-import { redirect } from "@remix-run/node";
-
 import type { LoaderFunction } from "@remix-run/node";
 
-import { ROUTE } from "~/utils/enum";
+import { withAuth } from "~/utils/authPolicy.server";
 
-export const loader: LoaderFunction = () => {
-  return redirect(ROUTE.SUGGESTIONS);
+export const loader: LoaderFunction = ({ request }) => {
+  return withAuth(request, { isPrivate: false });
 };
 
 const HomeRoute = () => {

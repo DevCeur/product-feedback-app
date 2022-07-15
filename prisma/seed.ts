@@ -76,17 +76,18 @@ export const getUser = async () => {
 };
 
 const seed = async () => {
+  const user = await prisma.user.create({ data: await getUser() });
+
   const baseProject = await prisma.project.create({
     data: {
       name: getProject().name,
+      user: { connect: { id: user.id } },
       suggestionCategories: {
         createMany: { data: getProject().suggestionCategories },
       },
     },
     include: { suggestionCategories: true },
   });
-
-  const user = await prisma.user.create({ data: await getUser() });
 
   await Promise.all(
     getSuggestions().map((suggestion) => {
