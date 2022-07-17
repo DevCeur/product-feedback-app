@@ -23,6 +23,6 @@ export type ExtendedError = Error & {
 
 export type SuggestionExtended = Suggestion & {
   category: SuggestionCategory;
-  project: Project;
+  project: ProjectExpanded;
   user: User;
 };

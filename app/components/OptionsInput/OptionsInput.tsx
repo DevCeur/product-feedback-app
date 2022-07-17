@@ -19,6 +19,7 @@ export const OptionsInput = ({
   label,
   name,
   options,
+  defaultValue,
   description,
 }: OptionsInputProps) => {
   return (
@@ -31,7 +32,7 @@ export const OptionsInput = ({
         )}
       </div>
 
-      <ListboxInput name={name} defaultValue={options[0].value}>
+      <ListboxInput name={name} defaultValue={defaultValue || options[0].value}>
         {({ value, isExpanded }) => (
           <>
             <ListboxButton className="w-full bg-bg-overlay !px-6 !py-4 rounded-lg outline-none !border-transparent !cursor-pointer">

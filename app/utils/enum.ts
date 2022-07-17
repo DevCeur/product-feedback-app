@@ -15,6 +15,13 @@ export const ERROR_MESSAGE = {
   SHORT_PASSWORD: "Password should have at least +6 characters",
 };
 
+export const SUGGESTION_STATUS = {
+  IDLE: "IDLE",
+  PLANNED: "PLANNED",
+  IN_PROGRESS: "IN_PROGRESS",
+  LIVE: "LIVE",
+};
+
 export const EMAIL_REGEX =
   // eslint-disable-next-line no-useless-escape
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

@@ -53,7 +53,7 @@ export const CreateSuggestionView = ({
             Cancel
           </Button>
 
-          <Button type="submit">Add Feedback</Button>
+          <Button type="submit">Create Suggestion</Button>
         </div>
       </Form>
     </FormLayout>

@@ -1,10 +1,16 @@
 import { prisma } from "~/lib/prisma.server";
 
+import type { SuggestionStatus } from "@prisma/client";
+
 export const getSuggestionById = async ({ id }: { id: string }) => {
   try {
     const suggestion = await prisma.suggestion.findUnique({
       where: { id },
-      include: { project: true, user: true, category: true },
+      include: {
+        project: { include: { suggestionCategories: true } },
+        user: true,
+        category: true,
+      },
     });
 
     return { suggestion, errors: null };
@@ -44,6 +50,40 @@ export const createSuggestion = async ({
     return {
       project: null,
       errors: { server: "There was an error creating this suggestion" },
+    };
+  }
+};
+
+type UpdateSuggestionOptions = {
+  suggestionId: string;
+  data: {
+    title: string;
+    category: string;
+    description: string;
+    status: SuggestionStatus;
+  };
+};
+
+export const updateSuggestion = async ({
+  suggestionId,
+  data,
+}: UpdateSuggestionOptions) => {
+  try {
+    const suggestion = await prisma.suggestion.update({
+      where: { id: suggestionId },
+      data: {
+        title: data.title,
+        description: data.description,
+        category: { connect: { id: data.category } },
+        status: { set: data.status },
+      },
+    });
+
+    return { suggestion, errors: null };
+  } catch (error) {
+    return {
+      suggestion: null,
+      errors: { server: "There was an error updating this suggestion" },
     };
   }
 };
