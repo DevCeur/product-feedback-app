@@ -1,11 +1,15 @@
+import { useLoaderData } from "@remix-run/react";
+
 import type { LoaderFunction } from "@remix-run/node";
 
 import { withAuth } from "~/utils/authPolicy.server";
 
-import { getAllUserProjects } from "~/services/project.server";
+import {
+  getAllUserProjects,
+  getFeaturedProject,
+} from "~/services/project.server";
 
 import { DashboardView } from "~/views/DashboardView";
-import { useLoaderData } from "@remix-run/react";
 
 export const loader: LoaderFunction = ({ request }) => {
   return withAuth(request, {
@@ -13,15 +17,19 @@ export const loader: LoaderFunction = ({ request }) => {
     callback: async ({ user }) => {
       const { projects } = await getAllUserProjects({ userId: user?.id || "" });
 
-      return { projects };
+      const { featuredProject } = await getFeaturedProject({
+        userId: user?.id || "",
+      });
+
+      return { user, projects, featuredProject };
     },
   });
 };
 
 const DashboardRoute = () => {
-  const { projects } = useLoaderData();
+  const { projects, user } = useLoaderData();
 
-  return <DashboardView projects={projects} />;
+  return <DashboardView user={user} projects={projects} />;
 };
 
 export default DashboardRoute;

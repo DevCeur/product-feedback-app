@@ -21,8 +21,7 @@ export const withAuth: Policy<{ user: User | null }> = async (
   const { user } = await getCurrentUser(request);
 
   if (isPrivate && !user) {
-    // TO-DO | Update to redirect to home when ready
-    return redirect("/sign-in");
+    return redirect(ROUTE.SIGN_IN);
   }
 
   if (!isPrivate && user) {

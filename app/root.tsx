@@ -20,6 +20,7 @@ import { getCurrentUser, getCurrentUserId } from "./services/user.server";
 
 import tailwindStyles from "~/styles/generated/tailwind.css";
 import menuButtonStyles from "@reach/menu-button/styles.css";
+import listboxStyles from "@reach/listbox/styles.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -30,6 +31,7 @@ export const meta: MetaFunction = () => ({
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStyles },
   { rel: "stylesheet", href: menuButtonStyles },
+  { rel: "stylesheet", href: listboxStyles },
 ];
 
 export const loader: LoaderFunction = async ({ request }) => {

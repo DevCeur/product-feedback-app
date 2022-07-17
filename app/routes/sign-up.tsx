@@ -72,7 +72,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   userSession.set("userId", user?.id);
 
-  return redirect(ROUTE.SUGGESTIONS, {
+  return redirect(ROUTE.DASHBOARD, {
     headers: { "Set-Cookie": await commitSession(userSession) },
   });
 };

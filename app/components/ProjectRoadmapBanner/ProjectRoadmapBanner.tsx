@@ -49,7 +49,7 @@ export const ProjectRoadmapBanner = ({
         <h4 className="text-lg text-fg-primary font-bold">Roadmap</h4>
 
         <Link
-          to="/roadmap"
+          to={`/project/${project.id}/roadmap`}
           className="text-sm text-brand-blue-primary underline hover:text-brand-blue-primary-light transition-colors duration-200"
         >
           View

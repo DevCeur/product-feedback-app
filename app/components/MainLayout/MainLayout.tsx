@@ -8,7 +8,7 @@ export const MainLayout: React.FC = ({ children }) => {
   const { user } = useLoaderData<RootLoaderData>();
 
   return (
-    <div className="w-full md:w-[95%] min-h-screen max-w-[1110px] px-5 md:mx-auto flex flex-col">
+    <div className="w-full md:w-[95%] min-h-screen max-w-[1110px] px-5 md:mx-auto flex flex-col pb-14">
       <TopNavigation user={user} />
 
       <div className="flex flex-1">{children}</div>

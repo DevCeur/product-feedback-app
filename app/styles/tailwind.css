@@ -30,23 +30,29 @@
   }
 }
 
-[data-reach-menu-item] {
+[data-reach-menu-item],
+[data-reach-listbox-option] {
   padding: 12px 24px !important;
 
   color: #3a4374;
   font-size: 16px !important;
 
+  cursor: pointer !important;
+
   border-bottom: 1px solid #eaeaea;
 }
 
-[data-reach-menu-item]:hover {
+[data-reach-menu-item]:hover,
+[data-reach-listbox-option]:hover,
+[data-reach-listbox-option][data-current-selected]:hover {
   color: #3a4374 !important;
   background-color: #f2f4ff !important;
 
   transition: all 0.2s ease;
 }
 
-[data-reach-menu-item]:last-child {
+[data-reach-menu-item]:last-child,
+[data-reach-listbox-option]:last-child {
   border-bottom: 0;
 }
 
@@ -68,4 +74,21 @@
 
   top: 24px;
   right: -48px;
+}
+
+.option-input-list[data-reach-listbox-popover] {
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-reach-listbox-option][data-current-selected] {
+  font-weight: normal !important;
+
+  background-color: transparent !important;
+  color: #3a4374 !important;
+}
+
+.options-input-item[data-reach-listbox-option][data-current-selected]
+  .selected-icon {
+  /* styles for the option matching the current value of the input */
+  opacity: 1;
 }

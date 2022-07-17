@@ -1,24 +1,17 @@
-import type { InputHTMLAttributes } from "react";
+import type { TextareaHTMLAttributes } from "react";
 
-import { Button } from "../Button";
-
-type TextInputProps = {
+type TextareaInputProps = {
   label: string;
   error?: string;
   description?: string;
-  action?: string;
-  onClickAction?: () => void;
-} & InputHTMLAttributes<HTMLInputElement>;
+} & TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-export const TextInput = ({
+export const TextareaInput = ({
   label,
   error,
-  type,
   description,
-  action,
-  onClickAction: handleClick,
   ...inputProps
-}: TextInputProps) => {
+}: TextareaInputProps) => {
   return (
     <label>
       <div className="mb-4 flex flex-col">
@@ -30,21 +23,14 @@ export const TextInput = ({
       </div>
 
       <div className="flex space-x-4">
-        <input
-          type={type || "text"}
-          className={`w-full text-fg-primary bg-bg-overlay px-6 py-4 rounded-lg outline-none border ${
+        <textarea
+          className={`w-full text-sm text-fg-primary bg-bg-overlay px-6 py-4 rounded-lg outline-none border ${
             error
               ? "border-red-500 focus:border-red-400"
               : "border-transparent focus:border-brand-blue-primary"
           } transition-colors duration-200`}
           {...inputProps}
         />
-
-        {action && (
-          <Button colorScheme="gray" onClick={handleClick}>
-            {action}
-          </Button>
-        )}
       </div>
 
       {error && <span className="text-xs text-red-500 mt-2">{error}</span>}
