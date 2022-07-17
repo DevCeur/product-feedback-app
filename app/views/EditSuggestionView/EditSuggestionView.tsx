@@ -68,12 +68,25 @@ export const EditSuggestionView = ({ suggestion }: EditSuggestionViewProps) => {
           />
         </div>
 
-        <div className="flex justify-end space-x-4">
-          <Button colorScheme="gray" onClick={() => navigate(-1)}>
-            Cancel
-          </Button>
+        <div className="flex items-center justify-between">
+          <Form method="post" action={`/suggestion/${suggestion.id}/delete`}>
+            <Button
+              type="submit"
+              name="projectId"
+              value={suggestion.project.id}
+              colorScheme="red"
+            >
+              Delete
+            </Button>
+          </Form>
 
-          <Button type="submit">Update Suggestion</Button>
+          <div className="flex space-x-4">
+            <Button colorScheme="gray" onClick={() => navigate(-1)}>
+              Cancel
+            </Button>
+
+            <Button type="submit">Update Suggestion</Button>
+          </div>
         </div>
       </Form>
     </FormLayout>

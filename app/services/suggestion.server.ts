@@ -87,3 +87,18 @@ export const updateSuggestion = async ({
     };
   }
 };
+
+export const deleteSuggestion = async ({ id }: { id: string }) => {
+  try {
+    const suggestion = await prisma.suggestion.delete({ where: { id } });
+
+    return { suggestion, errors: null };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      suggestion: null,
+      errors: { server: "There was an error updating this suggestion" },
+    };
+  }
+};
