@@ -8,7 +8,8 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { ERROR_MESSAGE } from "~/utils/enum";
 
 import { getCurrentUserId } from "~/services/user.server";
-import { createSuggestion, getProjectById } from "~/services/project.server";
+import { getProjectById } from "~/services/project.server";
+import { createSuggestion } from "~/services/suggestion.server";
 
 import { withAuth } from "~/utils/authPolicy.server";
 

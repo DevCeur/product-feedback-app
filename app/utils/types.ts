@@ -20,3 +20,9 @@ export type ExtendedError = Error & {
   code: string;
   meta: { target: string[] };
 };
+
+export type SuggestionExtended = Suggestion & {
+  category: SuggestionCategory;
+  project: Project;
+  user: User;
+};

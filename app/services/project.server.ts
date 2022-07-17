@@ -29,22 +29,17 @@ export const getFeaturedProject = async ({ userId }: { userId: string }) => {
   try {
     const projects = await prisma.project.findMany({
       where: { user: { id: userId } },
-      orderBy: { createdAt: "desc" },
+      orderBy: { suggestions: { _count: "desc" } },
       include: {
         suggestions: {
           include: { category: true, project: false },
-          orderBy: { votes: "desc" },
+          orderBy: { votes: "asc" },
         },
         suggestionCategories: true,
       },
     });
 
     let featuredProject = projects[0];
-
-    // TO-DO | create logic to sort by suggestions count
-    if (projects.length > 1) {
-      console.log(projects.sort((project) => project.suggestions.length));
-    }
 
     return { featuredProject, errors: null };
   } catch (e) {
@@ -99,38 +94,6 @@ export const createProject = async ({ request, data }: CreateProjectProps) => {
     return {
       project: null,
       errors: { server: "There was an error creating project" },
-    };
-  }
-};
-
-type CreateSuggestionOptions = {
-  userId: string;
-  projectId: string;
-  data: { title: string; category: string; description: string };
-};
-
-export const createSuggestion = async ({
-  data,
-  userId,
-  projectId,
-}: CreateSuggestionOptions) => {
-  try {
-    const suggestion = await prisma.suggestion.create({
-      data: {
-        title: data.title,
-        description: data.description,
-        user: { connect: { id: userId } },
-        project: { connect: { id: projectId } },
-        category: { connect: { id: data.category } },
-        votes: 0,
-      },
-    });
-
-    return { suggestion };
-  } catch (error) {
-    return {
-      project: null,
-      errors: { server: "There was an error creating this suggestion" },
     };
   }
 };

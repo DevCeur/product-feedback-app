@@ -1,4 +1,4 @@
-import type { Suggestion, SuggestionCategory } from "@prisma/client";
+import type { SuggestionExtended } from "~/utils/types";
 
 import { Link } from "@remix-run/react";
 import { BiChevronUp } from "react-icons/bi";
@@ -15,7 +15,7 @@ export const SuggestionCategoryBadge = ({ category }: { category: string }) => {
 };
 
 type SuggestionCardProps = {
-  suggestion: Suggestion & { category: SuggestionCategory };
+  suggestion: Partial<SuggestionExtended>;
 };
 
 export const SuggestionCard = ({ suggestion }: SuggestionCardProps) => {
@@ -31,7 +31,7 @@ export const SuggestionCard = ({ suggestion }: SuggestionCardProps) => {
         </button>
 
         <Link
-          to="/feedback-detail"
+          to={`/suggestion/${suggestion.id}`}
           className="flex md:hidden items-center space-x-3"
         >
           <FaComment className="text-xl text-bg-overlay-light" />
@@ -41,7 +41,7 @@ export const SuggestionCard = ({ suggestion }: SuggestionCardProps) => {
       </div>
 
       <Link
-        to="/feedback-detail"
+        to={`/suggestion/${suggestion.id}`}
         className="flex-1 mb-6 md:mb-0 flex items-center justify-between"
       >
         <div>
@@ -51,7 +51,9 @@ export const SuggestionCard = ({ suggestion }: SuggestionCardProps) => {
           <p className="text-sm text-fg-secondary mb-3">
             {suggestion.description}
           </p>
-          <SuggestionCategoryBadge category={suggestion.category.title} />
+          <SuggestionCategoryBadge
+            category={suggestion?.category?.title as string}
+          />
         </div>
 
         <div className="hidden md:flex items-center space-x-3">
