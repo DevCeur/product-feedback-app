@@ -1,8 +1,8 @@
-import type { SuggestionExtended } from "~/utils/types";
-
 import { Link } from "@remix-run/react";
 import { BiChevronUp } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
+
+import type { SuggestionExtended } from "~/utils/types";
 
 export const SuggestionCategoryBadge = ({ category }: { category: string }) => {
   return (
@@ -14,11 +14,43 @@ export const SuggestionCategoryBadge = ({ category }: { category: string }) => {
   );
 };
 
+export const SuggestionContent = ({
+  suggestion,
+}: {
+  suggestion: Partial<SuggestionExtended>;
+}) => {
+  return (
+    <>
+      <div>
+        <p className="md:text-lg font-bold text-fg-primary mb-1">
+          {suggestion.title}
+        </p>
+        <p className="text-sm text-fg-secondary mb-3">
+          {suggestion.description}
+        </p>
+        <SuggestionCategoryBadge
+          category={suggestion?.category?.title as string}
+        />
+      </div>
+
+      <div className="hidden md:flex items-center space-x-3">
+        <FaComment className="text-xl text-bg-overlay-light" />
+
+        <span className="font-bold text-fg-primary">2</span>
+      </div>
+    </>
+  );
+};
+
 type SuggestionCardProps = {
+  hideDetailsLink?: boolean;
   suggestion: Partial<SuggestionExtended>;
 };
 
-export const SuggestionCard = ({ suggestion }: SuggestionCardProps) => {
+export const SuggestionCard = ({
+  suggestion,
+  hideDetailsLink,
+}: SuggestionCardProps) => {
   return (
     <div className="w-full bg-white p-6 md:p-8 flex flex-col-reverse md:flex-row items-start justify-between md:space-x-10 rounded-xl">
       <div className="w-full md:w-min flex justify-between">
@@ -40,28 +72,18 @@ export const SuggestionCard = ({ suggestion }: SuggestionCardProps) => {
         </Link>
       </div>
 
-      <Link
-        to={`/suggestion/${suggestion.id}`}
-        className="flex-1 mb-6 md:mb-0 flex items-center justify-between"
-      >
-        <div>
-          <p className="md:text-lg font-bold text-fg-primary mb-1">
-            {suggestion.title}
-          </p>
-          <p className="text-sm text-fg-secondary mb-3">
-            {suggestion.description}
-          </p>
-          <SuggestionCategoryBadge
-            category={suggestion?.category?.title as string}
-          />
+      {hideDetailsLink ? (
+        <div className="flex-1 mb-6 md:mb-0 flex items-center justify-between">
+          <SuggestionContent suggestion={suggestion} />
         </div>
-
-        <div className="hidden md:flex items-center space-x-3">
-          <FaComment className="text-xl text-bg-overlay-light" />
-
-          <span className="font-bold text-fg-primary">2</span>
-        </div>
-      </Link>
+      ) : (
+        <Link
+          to={`/suggestion/${suggestion.id}`}
+          className="flex-1 mb-6 md:mb-0 flex items-center justify-between"
+        >
+          <SuggestionContent suggestion={suggestion} />
+        </Link>
+      )}
     </div>
   );
 };

@@ -29,7 +29,7 @@ export const SuggestionDetailView = ({
         )}
       </div>
 
-      <SuggestionCard suggestion={suggestion} />
+      <SuggestionCard suggestion={suggestion} hideDetailsLink />
     </div>
   );
 };

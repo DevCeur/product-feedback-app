@@ -1,5 +1,5 @@
 import { BiEdit } from "react-icons/bi";
-import { Form, useActionData, useNavigate } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import type { SuggestionExtended } from "~/utils/types";
 
@@ -10,6 +10,7 @@ import { FormLayout } from "~/components/FormLayout";
 import { TextInput } from "~/components/TextInput";
 import { OptionsInput } from "~/components/OptionsInput";
 import { TextareaInput } from "~/components/TextareaInput";
+import { DeleteSuggestionModal } from "~/components/DeleteSuggestionModal";
 
 type EditSuggestionViewProps = {
   suggestion: SuggestionExtended;
@@ -23,7 +24,6 @@ const SUGGESTION_STATUS_OPTIONS = [
 ];
 
 export const EditSuggestionView = ({ suggestion }: EditSuggestionViewProps) => {
-  const navigate = useNavigate();
   const actionData = useActionData();
 
   return (
@@ -69,21 +69,15 @@ export const EditSuggestionView = ({ suggestion }: EditSuggestionViewProps) => {
         </div>
 
         <div className="flex items-center justify-between">
-          <Form method="post" action={`/suggestion/${suggestion.id}/delete`}>
-            <Button
-              type="submit"
-              name="projectId"
-              value={suggestion.project.id}
-              colorScheme="red"
-            >
-              Delete
-            </Button>
-          </Form>
+          <DeleteSuggestionModal suggestion={suggestion} />
 
           <div className="flex space-x-4">
-            <Button colorScheme="gray" onClick={() => navigate(-1)}>
+            <Link
+              to={`/suggestion/${suggestion.id}`}
+              className="py-3 px-6 text-white text-sm bg-fg-primary hover:bg-brand-gray-primary-light font-semibold transition-colors duration-200 rounded-xl"
+            >
               Cancel
-            </Button>
+            </Link>
 
             <Button type="submit">Update Suggestion</Button>
           </div>

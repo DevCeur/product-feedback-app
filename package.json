@@ -20,6 +20,7 @@
     "start": "remix-serve build"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@prisma/client": "^4.0.0",
     "@reach/listbox": "^0.17.0",
     "@reach/menu-button": "^0.17.0",
