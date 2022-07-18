@@ -39,7 +39,14 @@ export const DeleteSuggestionModal = ({
             </Button>
 
             <Form method="post" action={`/suggestion/${suggestion.id}/delete`}>
-              <Button colorScheme="red">Delete</Button>
+              <Button
+                colorScheme="red"
+                type="submit"
+                name="projectId"
+                value={suggestion?.project?.id}
+              >
+                Delete
+              </Button>
             </Form>
           </div>
         </div>
