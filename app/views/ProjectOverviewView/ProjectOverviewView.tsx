@@ -50,14 +50,14 @@ export const ProjectOverviewView = ({
 
           {isAuthenticated && (
             <div className="hidden md:block lg:hidden">
-              <ProjectQuickActions />
+              <ProjectQuickActions project={project} />
             </div>
           )}
         </div>
 
         {isAuthenticated && (
           <div className="hidden lg:block">
-            <ProjectQuickActions />
+            <ProjectQuickActions project={project} />
           </div>
         )}
 

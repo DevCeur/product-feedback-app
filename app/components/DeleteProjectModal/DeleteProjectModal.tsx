@@ -1,32 +1,30 @@
 import { useState } from "react";
+import { BiTrash } from "react-icons/bi";
 import { Form } from "@remix-run/react";
 
-import type { SuggestionExtended } from "~/utils/types";
+import type { Project } from "@prisma/client";
 
 import { Button } from "../Button";
 import { BaseModal } from "../BaseModal";
 
-type DeleteSuggestionModalProps = {
-  suggestion: Partial<SuggestionExtended>;
+type DeleteProjectModalProps = {
+  project: Project;
 };
 
-export const DeleteSuggestionModal = ({
-  suggestion,
-}: DeleteSuggestionModalProps) => {
+export const DeleteProjectModal = ({ project }: DeleteProjectModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <Button colorScheme="red" type="button" onClick={() => setIsOpen(true)}>
-        Delete
-      </Button>
+      <button className="icon-button" onClick={() => setIsOpen(true)}>
+        <BiTrash />
+      </button>
 
       <BaseModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="text-center flex flex-col items-center justify-center">
           <h3 className="text-2xl font-semibold text-fg-primary mb-2">
-            Are you sure
-            <br />
-            you want to delete this suggestion?
+            Are you sure you want to delete
+            <br /> "{project.name}" project?
           </h3>
 
           <p className="text-sm text-fg-secondary mb-6">
@@ -38,15 +36,8 @@ export const DeleteSuggestionModal = ({
               Cancel
             </Button>
 
-            <Form method="post" action={`/suggestion/${suggestion.id}/delete`}>
-              <Button
-                colorScheme="red"
-                type="submit"
-                name="projectId"
-                value={suggestion?.project?.id}
-              >
-                Delete Suggestion
-              </Button>
+            <Form method="post" action={`/project/${project.id}/delete`}>
+              <Button colorScheme="red">Delete Project</Button>
             </Form>
           </div>
         </div>

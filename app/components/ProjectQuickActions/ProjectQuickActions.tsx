@@ -1,15 +1,21 @@
-import { BiPencil, BiShareAlt, BiTrash } from "react-icons/bi";
+import { Link } from "@remix-run/react";
+import { BiPencil, BiShareAlt } from "react-icons/bi";
 
-export const ProjectQuickActions = () => {
+import type { Project } from "@prisma/client";
+import { DeleteProjectModal } from "../DeleteProjectModal";
+
+type ProjecQuickActionsProps = {
+  project: Project;
+};
+
+export const ProjectQuickActions = ({ project }: ProjecQuickActionsProps) => {
   return (
     <div className="w-full p-4 lg:p-6 bg-white flex justify-between items-center rounded-xl">
-      <button className="icon-button">
-        <BiTrash />
-      </button>
+      <DeleteProjectModal project={project} />
 
-      <button className="icon-button">
+      <Link to={`/project/${project.id}/edit`} className="icon-button">
         <BiPencil />
-      </button>
+      </Link>
 
       <button className="icon-button">
         <BiShareAlt />

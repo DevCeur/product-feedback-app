@@ -97,3 +97,16 @@ export const createProject = async ({ request, data }: CreateProjectProps) => {
     };
   }
 };
+
+export const deleteProject = async ({ projectId }: { projectId: string }) => {
+  try {
+    const project = await prisma.project.delete({ where: { id: projectId } });
+
+    return { project, errors: null };
+  } catch (error) {
+    return {
+      project: null,
+      errors: { server: "There was an error deleting this project" },
+    };
+  }
+};
