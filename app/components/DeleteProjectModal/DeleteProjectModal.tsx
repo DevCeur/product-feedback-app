@@ -9,16 +9,26 @@ import { BaseModal } from "../BaseModal";
 
 type DeleteProjectModalProps = {
   project: Project;
+  bigButton?: boolean;
 };
 
-export const DeleteProjectModal = ({ project }: DeleteProjectModalProps) => {
+export const DeleteProjectModal = ({
+  project,
+  bigButton,
+}: DeleteProjectModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <button className="icon-button" onClick={() => setIsOpen(true)}>
-        <BiTrash />
-      </button>
+      {bigButton ? (
+        <Button type="button" colorScheme="red" onClick={() => setIsOpen(true)}>
+          Delete
+        </Button>
+      ) : (
+        <button className="icon-button" onClick={() => setIsOpen(true)}>
+          <BiTrash />
+        </button>
+      )}
 
       <BaseModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <div className="text-center flex flex-col items-center justify-center">

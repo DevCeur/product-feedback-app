@@ -98,6 +98,30 @@ export const createProject = async ({ request, data }: CreateProjectProps) => {
   }
 };
 
+type UpdateProjectOptions = {
+  projectId: string;
+  data: { name: string };
+};
+
+export const updateProject = async ({
+  projectId,
+  data,
+}: UpdateProjectOptions) => {
+  try {
+    const project = await prisma.project.update({
+      where: { id: projectId },
+      data: { name: data.name },
+    });
+
+    return { project, errors: null };
+  } catch (error) {
+    return {
+      project: null,
+      errors: { server: "There was an error updating this project" },
+    };
+  }
+};
+
 export const deleteProject = async ({ projectId }: { projectId: string }) => {
   try {
     const project = await prisma.project.delete({ where: { id: projectId } });
