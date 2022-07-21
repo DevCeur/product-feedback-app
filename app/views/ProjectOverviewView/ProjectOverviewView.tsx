@@ -1,33 +1,14 @@
-import { Link } from "@remix-run/react";
+import { HiLightBulb } from "react-icons/hi";
 import { BiChevronDown, BiMenu } from "react-icons/bi";
-import { HiLightBulb, HiPlusSm } from "react-icons/hi";
 
 import type { ProjectExpanded } from "~/utils/types";
 
 import { ProjectBanner } from "~/components/ProjectBanner";
-import { SuggestionCard } from "~/components/SuggestionCard";
+import { SuggestionsList } from "~/components/SuggestionsList";
+import { AddSuggestionLink } from "~/components/AddSuggestionLink";
 import { ProjectQuickActions } from "~/components/ProjectQuickActions";
 import { ProjectRoadmapBanner } from "~/components/ProjectRoadmapBanner";
 import { SuggestionCategoriesFilter } from "~/components/SuggestionCategoriesFilter";
-
-type AddSugestionLinkProps = {
-  project: ProjectExpanded;
-};
-
-const AddSuggestionLink = ({ project }: AddSugestionLinkProps) => {
-  return (
-    <Link
-      to={`/project/${project.id}/create-suggestion`}
-      className="text-sm text-white font-medium py-2 px-4 space-x-1 md:py-3 md:px-5 flex items-center bg-brand-purple hover:bg-brand-purple-light transition-colors duration-200 rounded-xl"
-    >
-      <span className="inline-block">
-        <HiPlusSm className="text-xl md:text-base md:mr-2" />
-      </span>
-      <span className="hidden md:inline-block">Add Feedback</span>
-      <span className="inline-block md:hidden">Add</span>
-    </Link>
-  );
-};
 
 type ProjectOverviewViewProps = {
   project: ProjectExpanded;
@@ -98,11 +79,7 @@ export const ProjectOverviewView = ({
         </div>
 
         <div className="w-full h-full lg:relative lg:overflow-auto lg:pb-[94px] ">
-          <div className="w-full lg:absolute top-0 right-0 flex-col space-y-6 pb-12">
-            {project.suggestions.map((suggestion) => (
-              <SuggestionCard key={suggestion.id} suggestion={suggestion} />
-            ))}
-          </div>
+          <SuggestionsList project={project} />
         </div>
       </div>
     </div>
