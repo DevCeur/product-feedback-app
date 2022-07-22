@@ -9,7 +9,10 @@ export const getAllUserProjects = async ({ userId }: { userId: string }) => {
       orderBy: { createdAt: "desc" },
       include: {
         suggestions: {
-          include: { category: true, project: false },
+          include: {
+            category: true,
+            project: false,
+          },
           orderBy: { votes: "desc" },
         },
         suggestionCategories: true,
@@ -56,7 +59,11 @@ export const getProjectById = async ({ id }: { id: string }) => {
       where: { id },
       include: {
         suggestions: {
-          include: { category: true, project: false },
+          include: {
+            category: true,
+            project: false,
+            votedBy: { include: { suggestion: true, user: true } },
+          },
           orderBy: { votes: "desc" },
         },
         suggestionCategories: true,

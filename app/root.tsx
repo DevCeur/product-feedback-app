@@ -5,7 +5,9 @@ import {
   Scripts,
   LiveReload,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
+import { useEffect } from "react";
 
 import type {
   LinksFunction,
@@ -13,6 +15,8 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import type { User } from "@prisma/client";
+
+import { useUser } from "./hooks/useUser";
 
 import { MainLayout } from "./components/MainLayout";
 
@@ -49,6 +53,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 const App = () => {
+  const { user } = useLoaderData();
+
+  const setUser = useUser((state) => state.setUser);
+
+  useEffect(() => {
+    setUser(user);
+  }, [setUser, user]);
+
   return (
     <html lang="en">
       <head>

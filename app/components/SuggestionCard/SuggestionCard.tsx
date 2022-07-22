@@ -1,8 +1,9 @@
 import { Link } from "@remix-run/react";
-import { BiChevronUp } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
 
 import type { SuggestionExtended } from "~/utils/types";
+
+import { VoteSuggestionButton } from "../VoteSuggestionButton";
 
 export const SuggestionCategoryBadge = ({ category }: { category: string }) => {
   return (
@@ -54,13 +55,7 @@ export const SuggestionCard = ({
   return (
     <div className="w-full bg-white p-6 md:p-8 flex flex-col-reverse md:flex-row items-start justify-between md:space-x-10 rounded-xl">
       <div className="w-full md:w-min flex justify-between">
-        <button className="px-3 py-2 flex md:flex-col items-center justify-center space-x-2 md:space-x-0 bg-bg-overlay hover:bg-bg-overlay-light rounded-xl transition-all duration-200">
-          <BiChevronUp className="text-xl text-brand-blue-primary" />
-
-          <span className="text-sm font-bold text-fg-primary">
-            {suggestion.votes}
-          </span>
-        </button>
+        <VoteSuggestionButton suggestion={suggestion} />
 
         <Link
           to={`/suggestion/${suggestion.id}`}

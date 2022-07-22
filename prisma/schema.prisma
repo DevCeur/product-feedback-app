@@ -15,16 +15,17 @@ enum SuggestionStatus {
 }
 
 model User {
-  id          String       @id @default(uuid())
+  id          String           @id @default(uuid())
   name        String
-  username    String       @unique
-  email       String       @unique
+  username    String           @unique
+  email       String           @unique
   password    String
   avatar      String
   projects    Project[]
   suggestions Suggestion[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @default(now()) @updatedAt
+  votes       suggestionVote[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @default(now()) @updatedAt
 }
 
 model Project {
@@ -48,6 +49,16 @@ model SuggestionCategory {
   updatedAt   DateTime     @default(now()) @updatedAt
 }
 
+model suggestionVote {
+  id           String     @id @default(uuid())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  suggestion   Suggestion @relation(fields: [suggestionId], references: [id])
+  suggestionId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt
+}
+
 model Suggestion {
   id          String              @id @default(uuid())
   title       String
@@ -58,9 +69,9 @@ model Suggestion {
   userId      String?
   status      SuggestionStatus    @default(IDLE)
   votes       Int
+  votedBy     suggestionVote[]
   category    SuggestionCategory? @relation(fields: [categoryId], references: [id])
   categoryId  String?
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @default(now()) @updatedAt
-
 }

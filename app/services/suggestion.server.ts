@@ -7,9 +7,10 @@ export const getSuggestionById = async ({ id }: { id: string }) => {
     const suggestion = await prisma.suggestion.findUnique({
       where: { id },
       include: {
-        project: { include: { suggestionCategories: true } },
         user: true,
         category: true,
+        project: { include: { suggestionCategories: true } },
+        votedBy: { include: { suggestion: true, user: true } },
       },
     });
 
@@ -90,7 +91,11 @@ export const updateSuggestion = async ({
 
 export const deleteSuggestion = async ({ id }: { id: string }) => {
   try {
-    const suggestion = await prisma.suggestion.delete({ where: { id } });
+    await prisma.suggestionVote.deleteMany({ where: { suggestionId: id } });
+
+    const suggestion = await prisma.suggestion.delete({
+      where: { id },
+    });
 
     return { suggestion, errors: null };
   } catch (error) {
@@ -99,6 +104,43 @@ export const deleteSuggestion = async ({ id }: { id: string }) => {
     return {
       suggestion: null,
       errors: { server: "There was an error updating this suggestion" },
+    };
+  }
+};
+
+type ToggleVoteOptions = {
+  userId: string;
+  subaction: string;
+  votedById: string;
+  suggestionId: string;
+};
+
+export const toggleVote = async ({
+  userId,
+  subaction,
+  votedById,
+  suggestionId,
+}: ToggleVoteOptions) => {
+  try {
+    const suggestion = await prisma.suggestion.update({
+      where: { id: suggestionId },
+      data:
+        subaction === "vote"
+          ? {
+              votes: { increment: 1 },
+              votedBy: { create: { user: { connect: { id: userId } } } },
+            }
+          : {
+              votes: { decrement: 1 },
+              votedBy: { delete: { id: votedById } },
+            },
+    });
+
+    return { suggestion, errors: null };
+  } catch (error) {
+    return {
+      suggestion: null,
+      errors: { server: "There was an error toggling this vote" },
     };
   }
 };

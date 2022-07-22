@@ -18,7 +18,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
 
       if (errors) {
-        return { errors };
+        console.log(errors);
       }
 
       return redirect(`/project/${projectId}`);
