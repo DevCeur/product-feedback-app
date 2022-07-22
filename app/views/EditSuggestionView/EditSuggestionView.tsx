@@ -1,7 +1,7 @@
 import { BiEdit } from "react-icons/bi";
 import { Form, Link, useActionData } from "@remix-run/react";
 
-import type { SuggestionExtended } from "~/utils/types";
+import type { ExtendedSuggestion } from "~/utils/types";
 
 import { SUGGESTION_STATUS } from "~/utils/enum";
 
@@ -13,7 +13,7 @@ import { TextareaInput } from "~/components/TextareaInput";
 import { DeleteSuggestionModal } from "~/components/DeleteSuggestionModal";
 
 type EditSuggestionViewProps = {
-  suggestion: SuggestionExtended;
+  suggestion: ExtendedSuggestion;
 };
 
 const SUGGESTION_STATUS_OPTIONS = [

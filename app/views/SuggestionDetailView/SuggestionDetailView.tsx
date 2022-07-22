@@ -1,16 +1,20 @@
 import { Link } from "@remix-run/react";
 
-import type { SuggestionExtended } from "~/utils/types";
+import type { User } from "@prisma/client";
+import type { ExtendedSuggestion } from "~/utils/types";
 
 import { GoBackButton } from "~/components/GoBackButton";
 import { SuggestionCard } from "~/components/SuggestionCard";
+import { CreateSuggestionCommentForm } from "~/components/CreateSuggestionCommentForm";
 
 type SuggestionDetailViewProps = {
-  suggestion: SuggestionExtended;
+  user: User;
+  suggestion: ExtendedSuggestion;
   showEditSuggestion: boolean;
 };
 
 export const SuggestionDetailView = ({
+  user,
   suggestion,
   showEditSuggestion,
 }: SuggestionDetailViewProps) => {
@@ -29,7 +33,17 @@ export const SuggestionDetailView = ({
         )}
       </div>
 
-      <SuggestionCard suggestion={suggestion} hideDetailsLink />
+      <div className="mb-6">
+        <SuggestionCard suggestion={suggestion} hideDetailsLink />
+      </div>
+
+      <div>
+        {suggestion.comments.map((comment) => (
+          <span key={comment.id}>{comment.message}</span>
+        ))}
+      </div>
+
+      <CreateSuggestionCommentForm user={user} suggestion={suggestion} />
     </div>
   );
 };

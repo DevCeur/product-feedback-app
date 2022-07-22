@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useFetcher } from "@remix-run/react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
-import type { SuggestionExtended } from "~/utils/types";
+import type { ExtendedSuggestion } from "~/utils/types";
 
 import { useUser } from "~/hooks/useUser";
 
 type VoteSuggestionButtonProps = {
-  suggestion: Partial<SuggestionExtended>;
+  suggestion: Partial<ExtendedSuggestion>;
 };
 
 export const VoteSuggestionButton = ({

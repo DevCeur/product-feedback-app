@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import { FaComment } from "react-icons/fa";
 
-import type { SuggestionExtended } from "~/utils/types";
+import type { ExtendedSuggestion } from "~/utils/types";
 
 import { VoteSuggestionButton } from "../VoteSuggestionButton";
 
@@ -18,7 +18,7 @@ export const SuggestionCategoryBadge = ({ category }: { category: string }) => {
 export const SuggestionContent = ({
   suggestion,
 }: {
-  suggestion: Partial<SuggestionExtended>;
+  suggestion: Partial<ExtendedSuggestion>;
 }) => {
   return (
     <>
@@ -37,7 +37,9 @@ export const SuggestionContent = ({
       <div className="hidden md:flex items-center space-x-3">
         <FaComment className="text-xl text-bg-overlay-light" />
 
-        <span className="font-bold text-fg-primary">2</span>
+        <span className="font-bold text-fg-primary">
+          {suggestion.comments?.length}
+        </span>
       </div>
     </>
   );
@@ -45,7 +47,7 @@ export const SuggestionContent = ({
 
 type SuggestionCardProps = {
   hideDetailsLink?: boolean;
-  suggestion: Partial<SuggestionExtended>;
+  suggestion: Partial<ExtendedSuggestion>;
 };
 
 export const SuggestionCard = ({

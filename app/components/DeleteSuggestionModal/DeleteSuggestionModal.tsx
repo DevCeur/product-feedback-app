@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Form } from "@remix-run/react";
 
-import type { SuggestionExtended } from "~/utils/types";
+import type { ExtendedSuggestion } from "~/utils/types";
 
 import { Button } from "../Button";
 import { BaseModal } from "../BaseModal";
 
 type DeleteSuggestionModalProps = {
-  suggestion: Partial<SuggestionExtended>;
+  suggestion: Partial<ExtendedSuggestion>;
 };
 
 export const DeleteSuggestionModal = ({

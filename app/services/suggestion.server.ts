@@ -11,6 +11,7 @@ export const getSuggestionById = async ({ id }: { id: string }) => {
         category: true,
         project: { include: { suggestionCategories: true } },
         votedBy: { include: { suggestion: true, user: true } },
+        comments: { include: { user: true } },
       },
     });
 

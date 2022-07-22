@@ -1,4 +1,5 @@
 import type {
+  Comment,
   Project,
   Suggestion,
   SuggestionCategory,
@@ -9,7 +10,7 @@ import type {
 export type ProjectWithSuggestions = Project & { suggestions: Suggestion[] };
 
 export type ProjectExpanded = Project & {
-  suggestions: SuggestionExtended[];
+  suggestions: ExtendedSuggestion[];
   suggestionCategories: SuggestionCategory[];
 };
 
@@ -27,9 +28,14 @@ export type ExtendedSuggestionVote = {
   suggestion: Suggestion;
 } & suggestionVote;
 
-export type SuggestionExtended = Suggestion & {
+export type ExtendedComment = {
+  user: User;
+} & Comment;
+
+export type ExtendedSuggestion = Suggestion & {
   votedBy: ExtendedSuggestionVote[];
   category: SuggestionCategory;
   project: ProjectExpanded;
   user: User;
+  comments: ExtendedComment[];
 };

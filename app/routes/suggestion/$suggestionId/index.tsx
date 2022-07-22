@@ -16,14 +16,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const showEditSuggestion = user?.id === suggestion?.user?.id;
 
-  return { suggestion, showEditSuggestion };
+  return { user, suggestion, showEditSuggestion };
 };
 
 const SuggestionDetailRoute = () => {
-  const { suggestion, showEditSuggestion } = useLoaderData();
+  const { user, suggestion, showEditSuggestion } = useLoaderData();
 
   return (
     <SuggestionDetailView
+      user={user}
       suggestion={suggestion}
       showEditSuggestion={showEditSuggestion}
     />

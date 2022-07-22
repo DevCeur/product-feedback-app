@@ -24,6 +24,7 @@ model User {
   projects    Project[]
   suggestions Suggestion[]
   votes       suggestionVote[]
+  comments    Comment[]
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @default(now()) @updatedAt
 }
@@ -72,6 +73,18 @@ model Suggestion {
   votedBy     suggestionVote[]
   category    SuggestionCategory? @relation(fields: [categoryId], references: [id])
   categoryId  String?
+  comments    Comment[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @default(now()) @updatedAt
+}
+
+model Comment {
+  id           String     @id @default(uuid())
+  message      String
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  suggestion   Suggestion @relation(fields: [suggestionId], references: [id])
+  suggestionId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt
 }
